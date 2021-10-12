@@ -1,0 +1,16 @@
+5
+Coke
+3
+4
+Apple
+1
+2
+Grapes
+2
+3
+Eggs
+2
+2
+Chicken
+2
+2
