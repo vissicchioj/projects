@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Lab 2
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt]{article} 
+
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\usepackage{lastpage}
+\usepackage{url}
+
+
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{page \thepage\ of \pageref{LastPage}} % Page numbering for center footer
+\fancyfoot[R]{}
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont\normalsize 
+   \textsc{CMPT 435 - Fall 2021 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \huge Assignment Two \\   % Assignment title
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+}
+
+\author{Jake Vissicchio \\ \normalsize Jake.Vissicchio1@Marist.edu}
+
+\date{\normalsize\today} 	% Today's date.
+\usepackage{multirow}
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%   CONTENT SECTION
+%----------------------------------------------------------------------------------------
+
+% - -- -  - -- -  - -- -  -
+
+\section{Results}
+
+\noindent
+
+
+
+\begin{tabular}{ |p{4cm}||p{4cm}|p{4cm}|p{4cm}|  }
+ \hline
+ \multicolumn{3}{|c|}{Sorting Magic Items} \\
+ \hline
+ Sort Type& Number of Comparisons Recorded & Asymtotic Running Time\\
+ \hline
+ Selection Sort   & 225415    & $O(n^2)$\\
+ Insertion Sort&   114927 & $O(n^2)$   \\
+ Merge Sort & 5443 & $O(n*log(n))$\\
+ Quick Sort    & 2975 & $O(n*log(n))$\\
+ \hline
+\end{tabular}
+\\
+
+\section{Explanations}
+\noindent
+\\
+Selection Sort is $O(n^2)$ because in order to sort it relies on the use\\
+of a nested for loop that we will have to go through in order to find position\\ of the smallest value (or in this case coming first in the alphabet.\\
+\\
+Insertion Sort is $O(n^2)$ because in order to sort it relies on the use\\
+of a nested loop. It has the potential to be faster than Selection Sort if\\
+the array is mostly sorted since it can skip more swaps and comparisons\\
+\\
+Merge Sort is $O(n*log(n)$ because it makes use of divide and conquer.\\
+The array of n elements is repeatedly halved while sorting which results\\ 
+in $O(log(n))$ and then the array of n elements is merged together resulting\\
+in $O(n)$. Putting these two together we get $O(n*log(n))$.\\
+\\
+Quick Sort is $O(n*log(n)$ because it also makes use of divide and conquer\\
+but differently from Merge Sort. While Merge Sort recursively divides until\\ array reaches a length of one then conquers. Quick Sort recursively divides \\
+and conquers by partitioning the halves around a pivot value. By making use \\
+of a good partition value the partitioning will have a complexity of $O(n)$.\\
+With Sith Lord Partitioning such as picking the first or last value as the\\
+pivot value every time it will increase the complexity even further.\\
+As before, the array of n elements being halved will result in $O(log(n))$.\\
+Putting these two together we get $O(n*log(n))$.\\
+
+\end{document}
+
