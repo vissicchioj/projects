@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+//Detects Palindromes given a text file using a Stack and a Queue implementation//
 
 public class PalindromesVissicchio
 {
