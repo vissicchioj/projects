@@ -1,0 +1,164 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Lab 5
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt]{article} 
+
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\usepackage{lastpage}
+\usepackage{url}
+
+
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{page \thepage\ of \pageref{LastPage}} % Page numbering for center footer
+\fancyfoot[R]{}
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont\normalsize 
+   \textsc{CMPT 435 - Fall 2021 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \huge Semester Project \\   % Assignment title
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+}
+
+\author{Jake Vissicchio \\ \normalsize Jake.Vissicchio1@Marist.edu}
+
+\date{\normalsize\today} 	% Today's date.
+\usepackage{multirow}
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%   CONTENT SECTION
+%----------------------------------------------------------------------------------------
+
+% - -- -  - -- -  - -- -  -
+
+\section{Results}
+\noindent
+Case 1: Represents a pool where there were no infected samples. \\
+Case 2: Represents when there is one or more infected samples within one half of the pool.\\
+Case 3: Represents where there are infected samples within both halves of the pool.\\
+\\
+Expected Results: \\
+Case (1): 125 × 0.8500 = 106.25 instances requiring 107 tests \\
+Case (2): 125 × 0.1496 = 18.70 instances requiring 131 tests \\
+Case (3): 125 × 0.0004 = 0.05 round up to 1 instance requiring 11 tests \\
+\\
+\noindent
+The table below represents the simulated results using different total\\ population sizes...\\
+
+\begin{tabular}{ |p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm} |}
+ \hline
+ \multicolumn{5}{|c|}{Pooled Testing Results Using Different Population Sizes} \\
+ \hline
+ Population: & Total Tests: & Case 1 Total: & Case 2 Total: & Case 3 Total: \\
+ \hline
+1,000   &  243    &  106 & 18 & 1\\
+10,000 & 2,410 & 1,064 & 175 & 11   \\
+100,000 & 23,960 & 10,642 & 1,780 & 78 \\
+1M & 240,028 & 106,326 & 17,928 & 746 \\
+ \hline
+\end{tabular}
+\\
+As shown, the results are close to the expected results. Also, each time we\\
+add a 0 to the population we often see each case amount go up by a new digit\\
+which fits.\\
+
+\section{Binomial Distribution \& \\Hypergeometric Distribution}
+\noindent
+\subsection{Binomial Distribution}
+Definition:\\
+Binomial Distribution is a discrete probability distribution of the possible\\ number of successful outcomes in a given number of trials in each of which \\
+there is the same probability of success.\\
+\\
+Formula: \\
+\[P_{x} = {n \choose x} p^{x} q^{n-x}\]
+$P$	=	binomial probability\\
+$x$	=	number of times for a specific outcome within n trials\\
+${n \choose x}$	=	number of combinations\\
+$p$	=	probability of success on a single trial\\
+$q$	=	probability of failure on a single trial\\
+$n$	=	number of trials\\
+
+\subsection{Hypergeometric Distribution}
+Definition: \\
+Hypergeometric Distribution is a discrete probability distribution that describes \\
+the probability of success given a number of trials, without replacement.\\\
+\\
+Formula: \\
+\[P_{x} = \frac{ _{s_{p}}C_{s_{s}}* _{n_{p}-s_{p}}C_{n_{s}-s_{s}}}{_{n_{p}}C_{n_{s}}}\]
+$P$	=	Hypergeometric probability\\
+$s_{p}$	= number of successes in the population\\
+$s_{s}$	= number of successes in the sample\\
+$n_{p}$	= size of the population\\
+$n_{s}$	= size of the sample\\
+
+\subsection{Difference}
+For binomial distribution, the probability is the same for every trial\\
+because it is WITH replacement. For Hypergeometric Distribution, the \\ probability changes each trial because it is WITHOUT replacement. This will\\
+cause each trial after one another to be different.\\
+The difference between the probabilities are very slim so it is usually\\
+okay to ignore for most applications.\\
+It will be best to use Hypergeometric Distribution when the population is small\\ since that is when we will see a difference due to its dependent nature.\\
+
+\section{How Can I Improve My Simulation?}
+\subsection{Adding False Positives/Negatives}
+Perhaps the adding of false positives and negatives will add another layer\\
+of realism within my simulation. While false positives are not too much too\\
+worry about besides taking up more tests, false negatives can be extremely\\
+dangerous since it allows an infected individual to do things as if they were \\
+not infected.
+
+\subsection{Vicinity Testing}
+Perhaps the adding of vicinity testing will also add realism within my\\ simulation. By vicinity testing, I mean having the pools be grouped together \\
+by people that live close to one another. This will add many more Case 3s to the
+results as those that are infected are likely to infect those around them.\\
+
+\subsection{Missing Testee}
+Perhaps adding a checker to see if an individual missed their test can prove\\
+to be beneficial for my simulation. At Marist, there were many times when \\
+students would skip their testing in favor of doing their Semester-Projects \\
+and would have to be reminded to go as soon as possible after or else there \\
+be punishment. This can be quite bad because they can be positive without \\
+knowing if they skipped their testing.\\
+
+
+\end{document}
