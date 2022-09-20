@@ -1,0 +1,24 @@
+Sokoban Beta Release Notes
+
+Enhancements:
+- Created a new logo for the splash screen as well as adding coins next to each option for a little more pizazz.
+- Changes the sprites of the baggage to coins since the dots looked to much alike the player sprite and 
+  it fit my sound effects better as well.
+- Added low volume electric music in the background.
+- Added 5 more levels for the player to try with three of them being challenge stages where the areas are in different spots.
+- Added a prompt for player to put in their name after finishing a level which then gets put into a text file to save high scores.
+- If a player does not fill in all 3 characters, each missing character is replaced with an 'A' to replicate old arcade high scores.
+- If a player puts in over 3 characters, only the first 3 characters are taken.
+- The high scores are now saved in ascending order due to the fact that the fastest times should be on top.
+- Checking the high scores now only shows the top 5 scores.
+- Changed the highscores text file to be written into the resources of the game folder since it will automatically be found 
+  no matter what computer it is put on without the need of creating a new folder such as tmp.
+
+Bugs:
+- (FIXED) As the player goes to put the last baggage into the last area, the high score prompt will show up 
+  before that last baggage in shown to be in the area.
+- (FIXED) Time was not resetting when restarting the game for the completion screen.
+- (FIXED) The high score prompt was writing in names that are larger than 3 characters into the text file.
+- (FIXED) Without a tmp folder, finding the high scores txt file is impossible.
+- (FIXED) If a player checks the scores when they first open up the game you will get an error since it cannot find the file due to it not
+  existing until the player puts in their first score.
