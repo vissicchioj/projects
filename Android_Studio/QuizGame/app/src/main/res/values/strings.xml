@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Guess the Game Based on the Image</string>
+    <string name="correct"><b>CORRECTNESS IS</b> \n
+                           <b>%1$d</b> OUT OF 6</string>
+    <string name="correct_answer">That\'s correct</string>
+    <string name="wrong_answer">That\'s incorrect</string>
+    <string name="a">Question 1</string>
+    <string name="b">Question 2</string>
+    <string name="c">Question 3</string>
+    <string name="d">Question 4</string>
+    <string name="e">Question 5</string>
+    <string name="f">Question 6</string>
+    <string name="userAnswer"></string>
+</resources>
