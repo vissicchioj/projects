@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity
         implements View.OnClickListener {
     // setting up things
     private Button confirmButton;
+    private ImageButton nextButton;
+    private ImageButton prevButton;
     private ImageView Image;
     private EditText textInput;
     private TextView questionTextView;
-    private TextView textOutput;
+    private TextView correctAnswer;
     private int correct = 0;
     // to keep current question track
     private int currentQuestionIndex = 0;
@@ -32,12 +34,12 @@ public class MainActivity extends AppCompatActivity
             // array of objects of class Question
             // providing questions from string
             // resource and the correct ans
-            new Question(R.string.a, "Super Mario 64"),
-            new Question(R.string.b, "Sonic The Hedgehog"),
-            new Question(R.string.c, "Street Fighter 2"),
-            new Question(R.string.d, "Super Smash Bros. Melee"),
-            new Question(R.string.e, "Call of Duty: Modern Warfare 2"),
-            new Question(R.string.f, "Elden Ring"),
+            new Question(R.string.a, new String[]{"Super Mario 64", "Mario 64"}, false),
+            new Question(R.string.b, new String[]{"Sonic The Hedgehog", "Sonic"}, false),
+            new Question(R.string.c, new String[]{"Street Fighter 2"}, false),
+            new Question(R.string.d, new String[]{"Super Smash Bros. Melee", "Melee", "Smash Melee"}, false),
+            new Question(R.string.e, new String[]{"Call of Duty Modern Warfare 2", "Modern Warfare 2", "MW2", "COD MW2", "Call of Duty MW 2"}, false),
+            new Question(R.string.f, new String[]{"Elden Ring"}, false),
 
     };
 
@@ -49,13 +51,17 @@ public class MainActivity extends AppCompatActivity
         // setting up the buttons
         // associated with id
         confirmButton = findViewById(R.id.confirm_button);
+        nextButton = findViewById(R.id.next_button);
+        prevButton = findViewById(R.id.prev_button);
         // register our buttons to listen to
         // click events
         Image = findViewById(R.id.myimage);
         confirmButton.setOnClickListener(this);
         textInput = findViewById(R.id.text_input);
         questionTextView = findViewById(R.id.answer_text_view);
-        textOutput = findViewById(R.id.userAnswer);
+        correctAnswer = findViewById(R.id.correct_answer);
+        nextButton.setOnClickListener(this);
+        prevButton.setOnClickListener(this);
     }
 
     @SuppressLint("SetTextI18n")
@@ -63,42 +69,65 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v)
     {
+        int toastMessageId;
         // checking which button is
         // clicked by user
         // in this case user choose false
         switch (v.getId()) {
             case R.id.confirm_button:
                 checkAnswer(textInput.getText().toString());
+                correctAnswer.setText(questionBank[currentQuestionIndex].getAnswer());
                 // go to next question
                 // limiting question bank range
                 //textOutput.setText(textInput.getText().toString());
-                if (currentQuestionIndex < 7) {
-                    currentQuestionIndex
-                            = currentQuestionIndex + 1;
-                    // we are safe now!
-                    // last question reached
-                    // making buttons
-                    // invisible
-                    if (currentQuestionIndex == 6) {
-                        questionTextView.setText(getString(
-                                R.string.correct, correct));
-                        confirmButton.setVisibility(
-                                View.INVISIBLE);
-                        textInput.setVisibility(
-                                View.INVISIBLE);
-                        questionTextView.setText(
-                                    "CORRECTNESS IS " + correct
-                                            + " "
-                                            + "OUT OF 6");
+//                if (currentQuestionIndex < 7) {
+//                    currentQuestionIndex
+//                            = currentQuestionIndex + 1;
+//                    // we are safe now!
+//                    // last question reached
+//                    // making buttons
+//                    // invisible
+//                    if (currentQuestionIndex == 6) {
+//                        questionTextView.setText(getString(
+//                                R.string.correct, correct));
+//                        confirmButton.setVisibility(
+//                                View.INVISIBLE);
+//                        textInput.setVisibility(
+//                                View.INVISIBLE);
+//                        questionTextView.setText(
+//                                    "CORRECTNESS IS " + correct
+//                                            + " "
+//                                            + "OUT OF 6");
                             // showing correctness
 
-                    }
-                    else {
-                        updateQuestion();
-                    }
+//                    }
+//                    else {
+//                        //updateQuestion();
+//                    }
+//                }
+                break;
+            case R.id.next_button:
+                if (currentQuestionIndex < 6) {
+                    currentQuestionIndex
+                            = currentQuestionIndex + 1;
+                    updateQuestion();
                 }
+                else
+                {
 
-//                break;
+                }
+                break;
+            case R.id.prev_button:
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex
+                            = currentQuestionIndex - 1;
+                    updateQuestion();
+                }
+                else
+                {
+
+                }
+                break;
         }
     }
 
@@ -111,6 +140,15 @@ public class MainActivity extends AppCompatActivity
         questionTextView.setText(
                 questionBank[currentQuestionIndex]
                         .getAnswerResId());
+
+        if (questionBank[currentQuestionIndex].getIsAnswered() == true)
+        {
+            correctAnswer.setText(questionBank[currentQuestionIndex].getAnswer());
+        }
+        else
+        {
+            correctAnswer.setText("");
+        }
         // setting the textview with new question
         switch (currentQuestionIndex) {
             case 0:
@@ -137,7 +175,8 @@ public class MainActivity extends AppCompatActivity
     }
     private void checkAnswer(String userAnswer)
     {
-        boolean isCorrect = questionBank[currentQuestionIndex].isAnswerCorrect(userAnswer);
+        boolean isCorrect = false;
+        isCorrect = questionBank[currentQuestionIndex].isAnswerCorrect(userAnswer);
         // getting correct ans of current question
         int toastMessageId;
         // if ans matches with the

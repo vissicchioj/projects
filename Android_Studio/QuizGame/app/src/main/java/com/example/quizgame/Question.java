@@ -11,14 +11,20 @@ public class Question
         // of the question provided
 
         // Perhaps make this into an array of possible correct answers
-        private String answer;
+        private String answers[];
 
-        public Question(int answerResId, String answer)
+        boolean isAnswered;
+
+        BinarySearch bSearch = new BinarySearch();
+        QuickSort qSort = new QuickSort();
+
+        public Question(int answerResId, String answers[], boolean isAnswered)
         {
             // setting the values through
             // arguments passed in constructor
             this.answerResId = answerResId;
-            this.answer = answer;
+            this.answers = answers;
+            this.isAnswered = isAnswered;
         }
 
         // returning the question passed
@@ -33,11 +39,31 @@ public class Question
             this.answerResId = answerResId;
         }
 
+        public String getAnswer()
+        {
+            return answers[0];
+        }
+
+        public boolean getIsAnswered(){return isAnswered;}
+
+        public void setIsAnswered(boolean isAnswered){this.isAnswered = isAnswered;}
+
         // returning the correct answer
         // of question
         public boolean isAnswerCorrect(String userAnswer)
         {
-            if (answer.toLowerCase().equals(userAnswer.toLowerCase()))
+//            if (answer.toLowerCase().equals(userAnswer.toLowerCase()))
+//            {
+//                return true;
+//            }
+//            else
+//            {
+//                return false;
+//            }
+            qSort.quickSort(answers, 0, answers.length - 1);
+            boolean isFound = false;
+            isFound = bSearch.search(answers, userAnswer, 0, answers.length - 1);
+            if (isFound == true)
             {
                 return true;
             }
@@ -51,7 +77,7 @@ public class Question
         // ans of question
         public void setAnswerTrue(String answer)
         {
-            this.answer = answer;
+            this.answers[0] = answer;
         }
 
 }

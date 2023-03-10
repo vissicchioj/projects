@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/userAnswer"
+        android:id="@+id/correct_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/userAnswer" />
